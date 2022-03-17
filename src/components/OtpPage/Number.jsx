@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./styles/Number.css";
 import Bluebtn from "./BlueBtn"
 import Phone from "./Phone";
+import { Link } from 'react-router-dom';
 
 function Number() {
   const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -39,7 +40,7 @@ function Number() {
           </div>
         </div>
         <Bluebtn text="RESEND OTP" img="" />
-        <Bluebtn text="CONTINUE" img="" />
+        <Link to="/products"><Bluebtn text="CONTINUE" img="" /></Link>
       </form>
     </div>
   );

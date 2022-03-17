@@ -8,6 +8,7 @@ import Delivery from "./Delivery";
 import Btn from "./Btn";
 import close from "./img/X.png"
 
+
 function ProductFlow() {
     return (
     <div className='product-flow'>
