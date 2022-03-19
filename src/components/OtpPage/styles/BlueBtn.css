@@ -12,12 +12,19 @@
     justify-content: center;
     margin-bottom: 2rem;
 }
+.sub{
+    padding: 3.8rem;
+    width: 88%;
+}
 
 .blue-text{ 
     color: white;;
     text-transform: uppercase;
     font-size: 2rem;
     font-weight: bold;
+    outline: none;
+    border: none;
+    background-color: none;
 }
 
 .blue-box img{

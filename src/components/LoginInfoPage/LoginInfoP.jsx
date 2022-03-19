@@ -3,8 +3,7 @@ import logo from "../images/512.png"
 import '../allLogin.css';
 import email from "./img/email.png";
 import person from "./img/person.png"
-import {Link} from 'react-router-dom';
-import { BrowserRouter as Redirect} from "react-router-dom";
+import { Link } from 'react-router-dom';
 import "../OtpPage/styles/WhiteBtn.css"
 import "../OtpPage/styles/BlueBtn.css"
 import  mobile from "../images/mobile.png"
@@ -30,44 +29,67 @@ function LoginInfo() {
   }
 
   function validateEmail(e){
-    let {name,value} = e.target;
-    if(name==="email"){
-      if(validator.isEmail(value)){
-        setEmailError("")
-      }else{
-        setEmailError("Enter Valid Email!")
-      }
+    let email = e.target.value;
+
+    if(validator.isEmail(email)){
+      setEmailError("")
+    }else{
+      setEmailError("Enter Valid Email!")
+    }
   }
-  }
+
   function inp(e){
     console.log(inputValues);
     let {name,value} = e.target;
-
     setInputValues((previousValue)=>{
+    
+    if(name ==="username"){
+    
       return {
-        ...previousValue,
-        [name]: value
-      };
+        
+      username:value,
+      email:previousValue.email,
+      phone:previousValue.phone
+        
+      }
+    }else if(name ==="email"){
+    
+    return {
+    
+      email:value,
+      username:previousValue.username,
+      phone:previousValue.phone
+    
+    }
+    }else if(name ==="phone"){
+    
+    return {
+    
+    phone:value,
+    username:previousValue.username,
+    email:previousValue.email
+    }
+    }
     });
   }
 
-  function handleSubmit(e){
+  function onSubmit(e){
       e.preventDefault();
       setusernameError("");
       setEmailError("");
       setphoneError("");
 
       if(inputValues.username ===""){
-        setusernameError("Please enter your username");
+        setusernameError("username is required");
         return false;
       }else if(inputValues.email ===""){
-      setEmailError("Please enter your Email ID");
+      setEmailError("Email is required");
       return false;
       }else if(inputValues.phone ===""){
-        setphoneError("Please enter your Phone Number");
+        setphoneError("phone is required");
         return false;
       }else{
-        return <Redirect to="/otplogin/" />
+          console.log("Form Submitted")
       }
   }
 
@@ -75,7 +97,7 @@ function LoginInfo() {
     <div className='otp-page'>
       <img src={logo} alt="logo" className='logo'/>
 
-      <form className='loginInfo-form'>
+      <form className='loginInfo-form' onSubmit={onSubmit()}>
 
         <div className='input_box'>
           <div className='white-box'>
@@ -101,30 +123,24 @@ function LoginInfo() {
             <div className='nr-input'>
               <span>+91</span>
                 <input
-                    type="text"
-                    pattern='[0-9*'
+                    type="tel"
                     label="Enter Phone Number"
                     title='Number'
                     required
                     name="phone"
                     maxLength="10"
                     value={inputValues.phone}
-                    onChange={(e) => inputEvent(e)}
                 />
             </div>
             <small style={{ fontWeight: 'bold',color: 'red',}}>{phoneerror}</small>
           </div>
           </div>
-          <button className='blue-box sub' type='submit' onClick={handleSubmit}>
-          <p className='blue-text'>CONTINUE</p></button>
-
-          {/* <Link to="/otplogin" >
-          <button className='blue-box sub' type='submit' onClick={handleSubmit}>
-          <p className='blue-text'>CONTINUE</p></button>
-          </Link> */}
-
-
-           </form>
+          <Link to="/otplogin">
+          <button className='blue-box sub' type='submit'>
+             <p className='blue-text'>CONTINUE</p> 
+            </button>
+          </Link>
+      </form>
       <a href="/">Need help?</a>
     </div>
   );
